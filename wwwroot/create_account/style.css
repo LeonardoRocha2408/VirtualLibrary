@@ -1,0 +1,44 @@
+* {
+    margin: 5px;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #F5E6CA;
+    min-height: 100vh;
+}
+
+#div_createAccount {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 5px 0 5px 5px;
+    background: #99653e;
+    box-shadow: 0px 0px 20px black;
+    border-radius: 20px;
+}
+
+#div_createAccount form {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    color: white;
+}
+#div_createAccount button {
+    align-self: flex-end;
+    background: linear-gradient(to right, rgb(214, 177, 109), rgb(180, 127, 58));
+    border: none;
+    border-radius: 5px;
+    padding: 6px;
+    margin: 10px;
+}
+#div_createAccount label {
+    align-self: first baseline;
+}

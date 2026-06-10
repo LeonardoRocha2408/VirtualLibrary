@@ -1,0 +1,7 @@
+bin/
+obj/
+.vs/
+.vscode/
+DatabaseConfig.cs
+appsettings.Development.json
+appsettings.json
