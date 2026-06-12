@@ -6,6 +6,6 @@ namespace LibraryShared.DTOs
 {
     public class AddFavoriteGender
     {
-        public string FavoriteCategories { get; set; } = string.Empty; 
+        public List<string> FavoriteCategories { get; set; } = new(); 
     }
 }

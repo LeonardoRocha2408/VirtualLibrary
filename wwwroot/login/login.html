@@ -11,14 +11,21 @@
             <form id="initialLogin">
                 <h1 id="loginTitle">Faça seu login</h1>
                 <label for="name">Nome: </label>
+            <div class="organizesInput">
+                <img src="../../Images/icons/iconUser.png">
                 <input type="text" placeholder="Digite seu username" id="name">
+            </div>
 
                 <label for="password">Senha: </label>
+            <div class="organizesInput">
+                <img src="../../Images/icons/iconPassword.png">
                 <input type="password" placeholder="Digite sua senha" id="password">
+            </div>
+                <button type="submit">Entrar</button>
+                <p>Não tem uma conta ainda? <a href="../create_account/create_account.html">Cadastre-se</a></p>
 
-                <button type="submit">entrar</button>
+                <a href="../change_password/change_password.html">Esqueci minha senha</a>
             </form>        
-            <p>Não tem uma conta ainda? <a href="../create_account/create_account.html">Cadastre-se</a></p>
         </div>
         <script src="login.js"></script>
     </body>

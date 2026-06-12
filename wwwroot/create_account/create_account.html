@@ -8,15 +8,20 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <div id="div_createAccount">
+        <div id="createAccount">
             <form id="formToCreate">
-                <h1>Crie sua conta</h1>
-                <label for="username">Username</label>
+                <h1 id="title">Crie sua conta</h1>
+                <label for="username">Nome: </label>
+            <div class="organizesInput">
+                <img src="../../Images/icons/iconUser.png">
                 <input type="text" id="username" placeholder="Digite seu username">
+            </div>
 
-                <label for="password">Senha</label>
+                <label for="password">Senha: </label>
+            <div class="organizesInput">
+                <img src="../../Images/icons/iconPassword.png">
                 <input type="password" id="password" placeholder="Digite sua senha">
-
+            </div>
                 <button type="submit">Criar</button>
 
                 <p>Já possui uma conta? <a href="../login/login.html">Faça login</a></p>

@@ -77,12 +77,12 @@ app.MapPatch("/users/changed-password", (ChangePasswordRequest request) =>
     bool TrueOrFalse = Services.ChangePassword(request.Username, request.Password, request.NewPassword);
     if (TrueOrFalse == false)
     {
-        return "Dados incorretos";
+        return Results.BadRequest("Dados incorretos");
     }
     else
     {
         User!.ChangePasswordInMemory(request.NewPassword);
-        return "Senha alterada com sucesso!";
+        return Results.Ok("Alterado com sucesso");
     }
 });
 
