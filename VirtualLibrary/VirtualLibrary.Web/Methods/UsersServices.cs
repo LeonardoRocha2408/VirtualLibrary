@@ -79,6 +79,7 @@ namespace LibraryApi.Methods
         // MUDA SENHA 
         public static bool ChangePassword(string username, string password, string newPassword)
         {
+            Console.WriteLine("Entrou no metodo");
             LibraryAccount userToChangePassword = new LibraryAccount(username, password);
             var account = Login(userToChangePassword);
 
@@ -106,22 +107,26 @@ namespace LibraryApi.Methods
 
         }
         //ADICIONA O GÊNERO FAVORITO NO PERFIL
-        public static void AddFavoriteGender(LibraryAccount? User, string categorySelected)
+        public static void AddFavoriteGender(LibraryAccount? User, List<string> categorySelected)
         {
             var account = Login(User);
                 
             using (MySqlConnection connection = Database.GetConnection())
             {
                 connection.Open();
-                string querySelect = "SELECT id WHERE username = @username AND password = @password";
+                string querySelect = "SELECT id FROM users WHERE username = @username AND password = @password";
                 MySqlCommand commandSelect = new MySqlCommand(querySelect, connection);
                 commandSelect.Parameters.AddWithValue("@username", account!.Username);
                 commandSelect.Parameters.AddWithValue("@password", account!.Password);
                 MySqlDataReader reader = commandSelect.ExecuteReader();
 
-                int id = Convert.ToInt32(reader["id"]);
-                reader.Close();
+                int id = 0;
 
+                if(reader.Read())
+                {
+                    id = Convert.ToInt32(reader["id"]);
+                    reader.Close();
+                }
 
 
                 if (categorySelected != null)
@@ -130,9 +135,9 @@ namespace LibraryApi.Methods
 
                     MySqlCommand command = new MySqlCommand(query, connection);
 
-                    account.FavoriteCategory.Add(categorySelected);
-
-                    command.Parameters.AddWithValue("@categorySelected", account.FavoriteCategory);
+                    account.FavoriteCategory = categorySelected;
+                    string categories = string.Join(", ", categorySelected);
+                    command.Parameters.AddWithValue("@categorySelected", categories);
                     command.Parameters.AddWithValue("@id", id);
                     command.ExecuteNonQuery();
                 }

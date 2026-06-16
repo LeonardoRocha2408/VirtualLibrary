@@ -1,5 +1,5 @@
 using LibraryApi;
-using LibraryShared.DTOs;
+using VirtualLibrary.Web.DTOs;
 using LibraryApi.Methods;
 using Microsoft.AspNetCore.Mvc;
 using MySqlX.XDevAPI.Common;
@@ -72,7 +72,7 @@ app.MapPost("/login", ([FromBody] LoginRequest request) =>
     return Results.Ok("Logado com sucesso");
 });
 
-app.MapPatch("/users/changed-password", (ChangePasswordRequest request) =>
+app.MapPatch("/users/changed-password", ([FromBody] ChangePasswordRequest request) =>
 {
     bool TrueOrFalse = Services.ChangePassword(request.Username, request.Password, request.NewPassword);
     if (TrueOrFalse == false)
@@ -87,15 +87,23 @@ app.MapPatch("/users/changed-password", (ChangePasswordRequest request) =>
 });
 
 //ADICIONA GÊNERO FAVORITO
-app.MapPatch("/users/favorite-categories", (AddFavoriteGender request) =>
+app.MapPut("/users/favorite-categories", ([FromBody] AddFavoriteGender request) =>
 {
-    Services.Login(User);
-    Services.AddFavoriteGender(
-        User!, request.FavoriteCategories
-        );
+    var account = Services.Login(User);
 
-//DELETA CONTA
+    if (account == null)
+    {
+        return Results.BadRequest("Erro");
+    }
+    Console.WriteLine("Entrou na rota");
+    Services.AddFavoriteGender(account, request.FavoriteCategories);
+
+    return Results.Accepted("", new
+    {
+        message = "Categorias adicionadas"
+    });
 });
+//DELETA CONTA
 app.MapPost("/users/delete-account", (DeleteRequest request) =>
 {
     Services.DeleteAccount(

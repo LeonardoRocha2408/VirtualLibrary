@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LibraryShared.DTOs
+namespace VirtualLibrary.Web.DTOs
 {
     public class ChangePasswordRequest
     {

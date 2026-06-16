@@ -28,7 +28,7 @@ form.addEventListener("submit", async (event) => {
         })
         .then (data => {
             console.log("Conta criada: " + data);
-            window.location.href = "../home/home.html"
+            window.location.href = "../add_favorite_categories/add_favorite_categories.html"
         })
     }
     catch (error) {

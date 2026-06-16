@@ -1,4 +1,4 @@
-namespace LibraryShared.DTOs
+namespace VirtualLibrary.Web.DTOs
 {
     public class LoginRequest
     {
