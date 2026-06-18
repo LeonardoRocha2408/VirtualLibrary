@@ -3,6 +3,7 @@ using VirtualLibrary.Web.DTOs;
 using LibraryApi.Methods;
 using Microsoft.AspNetCore.Mvc;
 using MySqlX.XDevAPI.Common;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -110,7 +111,18 @@ app.MapPost("/users/delete-account", (DeleteRequest request) =>
         request.Username, 
         request.Password
         );
-    return "API funfou";
+    return Results.Accepted("Conta deletada");
 });
 
+//PESQUISA LIVROS
+app.MapGet("home/search-books", (string bookName) =>
+{
+    Console.Write("Entrou na rota");
+    var books = BookServices.SearchBook(bookName);
+    if (books?.Count == 0 || books == null)
+    {
+        return Results.Ok(new List<string>());
+    }
+    return Results.Ok(books);
+});
 app.Run();

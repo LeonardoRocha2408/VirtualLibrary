@@ -10,6 +10,7 @@ body {
     justify-content: center;
     align-items: center;
     overflow-x: hidden;
+    width: 100%;
     max-width: 100vw;
     background-color: #f1ddb8;
 }
@@ -18,8 +19,11 @@ header {
     display: flex;
     width: 100%;
     background-color: rgb(51, 28, 17);
-    height: 150px;
+    height: auto;
     padding: 10px;
+}
+#logo {
+    height: 100px;
 }
 #titleLibrary {
     display: flex;
@@ -115,3 +119,4 @@ input {
 .category:has(input:checked) {
     transform: scale(1.15);
 }
+

@@ -6,31 +6,26 @@ namespace LibraryApi.Methods
         //PESQUISA LIVROS
         public static List<string>? SearchBook(string searchByBookName)
         {
-            List<string>? booksToShow = null;
+            Console.WriteLine("Entrou no método");
+            List<string>? booksToShow = new();
             using (MySqlConnection connection = Database.GetConnection())
             {
                 connection.Open();
 
-                string query = $"SELECT * FROM books WHERE name_book = @searchByBookName";
+                Console.WriteLine(searchByBookName);
+                string query = $"SELECT * FROM books WHERE name_book LIKE @searchByBookName";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
-                command.Parameters.AddWithValue("@searchByBookName", searchByBookName);
+                command.Parameters.AddWithValue("@searchByBookName", $"%{searchByBookName}%");
 
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {
-                    if (!reader.Read())
+                    while (reader.Read())
                     {
-                        Console.WriteLine("Livro não encontrado");
+                        string bookName = reader["name_book"].ToString()!;
+                        booksToShow.Add(bookName);
                     }
-                    else
-                    {
-                        string? toCompare = reader["name_book"].ToString();
-                        if (toCompare!.Contains(searchByBookName, StringComparison.OrdinalIgnoreCase))
-                        {
-                            booksToShow = new List<string>();
-                            booksToShow.Add(toCompare);
-                        }
-                    }
+                    Console.WriteLine($"{booksToShow.Count}");
                 }
             }
             return booksToShow;
